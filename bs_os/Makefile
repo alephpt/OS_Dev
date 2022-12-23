@@ -23,7 +23,7 @@ kernel.dis: kernel.bin
 mbr.bin: mbr.asm
 	nasm $< -f bin -o $@
 
-os-image.bin: mbr.bin kernel.bin
+os.bin: mbr.bin kernel.bin
 	cat $^ > $@
 
 run: os.bin

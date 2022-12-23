@@ -42,7 +42,7 @@ void char_set (char character, int offset) {
 
 int get_row (int offset) { return offset / (2 * MAX_COLS); }
 int get_offset (int col, int row) { return 2 * (row * MAX_COLS + col); }
-int new_line (int offset) { return get_offset(0, get_row(offset) + 1; }
+int new_line (int offset) { return get_offset(0, get_row(offset) + 1); }
 
 void mem_cpy (char *source, char *dest, int nbytes) {
     int i;
