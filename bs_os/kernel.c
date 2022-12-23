@@ -1,4 +1,6 @@
+#include "./drivers/display.h"
+
 void main (){
-    char* video_memory = (char*)0x8000;
-    *video_memory = 'X';
+    screen_clear();
+    string_print("Hello, Kernel!\n");
 }
