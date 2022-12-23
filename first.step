@@ -1,0 +1,5 @@
+CURRENT=$(pwd)
+export PREFIX="$CURRENT/cross"
+export SRC="$CURRENT/src"
+export TARGET=i686-elf
+export PATH="$PREFIX/bin:$PATH"
