@@ -11,8 +11,8 @@ os.bin: boot/mbr.bin kernel.bin
 	cat $^ > $@
 
 run: os.bin
-	# qemu-system-i386 -hda $<
-	qemu-system-i386 -drive format=raw,media=disk,index=0,file=$<
+	qemu-system-i386 -fda $<
+#	qemu-system-i386 -drive format=raw,media=disk,index=0,file=$<
 
 echo: os.bin
 	xxd $<

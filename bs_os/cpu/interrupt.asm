@@ -153,7 +153,7 @@ isr7:
     jmp isr_common_stub
 
 isr8:
-    push byte 0
+;    push byte 0
     push byte 8
     jmp isr_common_stub
 
@@ -163,27 +163,27 @@ isr9:
     jmp isr_common_stub
 
 isr10:
-    push byte 0
+;    push byte 0
     push byte 10
     jmp isr_common_stub
 
 isr11:
-    push byte 0
+;    push byte 0
     push byte 11
     jmp isr_common_stub
 
 isr12:
-    push byte 0
+;    push byte 0
     push byte 12
     jmp isr_common_stub
 
 isr13:
-    push byte 0
+;    push byte 0
     push byte 13
     jmp isr_common_stub
 
 isr14:
-    push byte 0
+;    push byte 0
     push byte 14
     jmp isr_common_stub
 
