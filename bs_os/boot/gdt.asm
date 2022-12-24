@@ -1,5 +1,6 @@
 gdt_start:
-    dq 0x0
+    dd 0x0
+    dd 0x0
 
 gdt_code:
     dw 0xffff       ; seg len,  0-15
