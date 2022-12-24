@@ -12,7 +12,7 @@ void kernel_entry (){
     isr_install();
 
     string_print("External Interrupts Enabling .. \n");
-    __asm__ volatile("sti");
+    asm volatile("sti");
 
     string_print("Keyboard Initializing (IRQ 1) .. \n");
     keyboard_init();

@@ -19,9 +19,9 @@
 #define IRQ15 47
 
 typedef struct {
-    uint32_t dss;
-    uint32_t ei, esi, ebp, esp, ebx, edx, ecx, eax;
-    uint32_t int_no, err_no;
+    uint32_t ds;
+    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+    uint32_t int_no, err_code;
     uint32_t eip, cs, eflags, useresp, ss;
 } registers_t;
 
