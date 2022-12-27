@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "./display.h"
 #include "./io.h"
-#include "../utility/utils.h"
+#include "../utility/memory.h"
 
 void cursor_set (int offset) {
     offset /= 2;
@@ -10,6 +10,8 @@ void cursor_set (int offset) {
     byte_out(VGA_DATA, (unsigned char) (offset >> 8));
     byte_out(VGA_CTRL, VGA_LOW_OFFSET);
     byte_out(VGA_DATA, (unsigned char) (offset & 0xff));
+
+    return;
 }
 
 int cursor_get () {
@@ -23,7 +25,8 @@ int cursor_get () {
 void char_set (char character, int offset) {
     unsigned char *vidm = (unsigned char *) VIDEO_BUFFER;
     vidm[offset] = character;
-    vidm[offset + 1] = WonB; 
+    vidm[offset + 1] = WonB;
+    return;
 }
 
 int get_row (int offset) { return offset / (2 * MAX_COLS); }
@@ -47,6 +50,7 @@ int scroll (int offset) {
 void string_print (char *string) {
     int offset = cursor_get();
     int i = 0;
+
     while (string[i] != 0) {
         if (offset >= MAX_ROWS * MAX_COLS * 2) {
             offset = scroll(offset);
@@ -60,7 +64,16 @@ void string_print (char *string) {
         }
         i++;
     }
+
     cursor_set(offset);
+    return;
+}
+
+void backspace_print () {
+    int newCursor  = cursor_get() - 2;
+    char_set(' ', newCursor);
+    cursor_set(newCursor);
+    return;
 }
 
 void newline_print () {
@@ -71,6 +84,7 @@ void newline_print () {
     }
 
     cursor_set(newOffset);
+    return;
 }
 
 void screen_clear() {
@@ -79,4 +93,5 @@ void screen_clear() {
     }
 
     cursor_set(get_offset(0, 0));
+    return;
 }

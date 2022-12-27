@@ -2,7 +2,8 @@
 #include "./isr.h"
 #include "../drivers/display.h"
 #include "../drivers/io.h"
-#include "../utility/utils.h"
+#include "../utility/memory.h"
+#include "../utility/int.h"
 
 uint32_t tick = 0;
 
@@ -11,7 +12,7 @@ static void timer_callback (registers_t *regs) {
     string_print("Tick: ");
 
     char tick_ascii[256];
-    int_to_string(tick, tick_ascii);
+    toString(tick, tick_ascii);
     string_print(tick_ascii);
     newline_print();
 }

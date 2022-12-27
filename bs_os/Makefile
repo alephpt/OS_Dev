@@ -18,7 +18,7 @@ echo: os.bin
 	xxd $<
 
 %.o: %.c ${C_HEADERS}
-	i686-elf-gcc -g -m32 -ffreestanding -c $< -o $@ #-g
+	i686-elf-gcc -g -m32 -ffreestanding -c $< -o $@ -g
 
 %.o: %.asm
 	nasm $< -f elf -o $@
@@ -33,8 +33,8 @@ kernel.elf: boot/entry.o ${OBJ_FILES}
 	i686-elf-ld -m elf_i386 -o $@ -Ttext 0x1000 $^
 
 debug: os.bin kernel.elf
-	qemu-system-i386 -s -S -drive format=raw,media=disk,index=0,file=os.bin -d guest_errors,int &
-	i686-elf-gdb -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
+	qemu-system-i386 -S -fda os.bin -gdb tcp::9000 -monitor telnet:localhost:9002,server,nowait &
+	gdb -ex "target remote localhost:9000" -ex "symbol-file kernel.elf"
 
 clean:
 	$(RM) -v *.bin *.o *.dis *.elf

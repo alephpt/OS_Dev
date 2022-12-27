@@ -1,4 +1,4 @@
 #pragma once
-#include "../utility/utils.h"
+#include "../utility/memory.h"
 
 void timer_init(uint32_t freq);

@@ -11,5 +11,6 @@
 
 int scroll (int offset);
 void string_print (char *string);
+void backspace_print ();
 void newline_print ();
 void screen_clear ();
