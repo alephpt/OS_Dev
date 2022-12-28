@@ -1,9 +1,11 @@
 #include <stdint.h>
+#include "./int.h"
+#include "../drivers/display.h"
 
 int str_len (char s[]) {
     int i = 0;
     
-    while(s[++i] != '\0');
+    while(s[i] != '\0') { ++i; }
 
     return i;
 }
@@ -20,7 +22,7 @@ void reverse (char s[]) {
     return;
 }
 
-void append (char s[], char n) {
+void append (char *s, char n) {
     int len = str_len(s);
 
     s[len] = n;
@@ -39,4 +41,15 @@ int str_comp (char s1[], char s2[]) {
     }
     // is this supposed to be length? :thonks:
     return s1[i] - s2[i];
+}
+
+char* str_strip (char *str) {
+    char *newStr;
+    int strlen = str_len(str);
+
+    for (int i = 0; i < strlen; i++) {
+        newStr[i] = str[i];
+    }
+
+    return newStr;
 }

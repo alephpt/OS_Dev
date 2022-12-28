@@ -19,8 +19,8 @@ void kernel_init () {
     string_print("Dynamic Memory Initializing .. \n");
     dynamicMemory_init();
 
-//    newline_print();
-    screen_clear();
+    newline_print();
+//    screen_clear();
 
     return;
 }
@@ -31,7 +31,7 @@ void kernel_entry (){
     string_print(" - | Welcome to Gambit | - ");
     newline_print();
 
-    string_print(" > ");
+    string_print("\n > ");
 
     return;
 }

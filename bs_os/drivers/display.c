@@ -2,6 +2,10 @@
 #include "./display.h"
 #include "./io.h"
 #include "../utility/memory.h"
+#include "../utility/string.h"
+#include "../utility/math.h"
+
+static const char numbers[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 void cursor_set (int offset) {
     offset /= 2;
@@ -66,6 +70,21 @@ void string_print (char *string) {
     }
 
     cursor_set(offset);
+    return;
+}
+
+void int_print (int n) {
+    int count = (n == 0) ? 1 : log10(n) + 1;
+    char str[count];
+
+    for (int i = 0; i < count; i++) {
+        int rem = n % 10;
+        append(str, numbers[rem]);
+        n /= 10;
+    }
+
+    string_print(str);
+
     return;
 }
 

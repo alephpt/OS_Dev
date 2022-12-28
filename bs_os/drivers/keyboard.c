@@ -37,17 +37,15 @@ static void keyboard_callback (registers_t *regs) {
     if (scanned == ENTER) {
         newline_print();
         execute_input(input_buffer);
-       // input_buffer[0] = '\0';
+        input_buffer[0] = '\0';
     } else {
-        char let = ascii_table[(int) scanned];
-        append(input_buffer, let);
-        char str[2] = { let, '\0' };
+        char letter = ascii_table[(int) scanned];
+        append(&input_buffer, letter);
+        char str[2] = { letter, '\0' };
         string_print(str);
     }
 
     return;
 }
 
-void keyboard_init () {
-    register_interrupt_handler(IRQ1, keyboard_callback);    
-}
+void keyboard_init () { register_interrupt_handler(IRQ1, keyboard_callback); }
