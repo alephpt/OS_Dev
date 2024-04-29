@@ -1,6 +1,6 @@
 BUILD_DIR = ~/mine/build
-C_SOURCES = $(wildcard utility/*.c drivers/*.c cpu/*.c kernel/kernel.c)
-C_HEADERS = $(wildcard utility/*.h drivers/*.h cpu/*.h)
+C_SOURCES = $(wildcard utility/*.c drivers/*.c cpu/*.c kernel/kernel.c extras/*.c)
+C_HEADERS = $(wildcard utility/*.h drivers/*.h cpu/*.h extras/*.h)
 OBJ_FILES = $(C_SOURCES:.c=.o cpu/interrupt.o)
 
 all: run

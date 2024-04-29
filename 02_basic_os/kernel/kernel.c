@@ -3,9 +3,10 @@
 #include "../cpu/idt.h"
 #include "../cpu/isr.h"
 #include "../utility/memory.h"
+#include "../extras/circle.h"
 
 void kernel_init () {
-    screen_clear();
+    //screen_clear();
 
     string_print("Interrupt Service Routines Loading .. \n");
     isr_install();
@@ -19,7 +20,7 @@ void kernel_init () {
     string_print("Dynamic Memory Initializing .. \n");
     dynamicMemory_init();
 
-    newline_print();
+    //newline_print();
 //    screen_clear();
 
     return;
@@ -28,8 +29,12 @@ void kernel_init () {
 void kernel_entry (){
     kernel_init();
 
+    newline_print();
     string_print(" - SwarmOS - ");
     newline_print();
+
+    // This doesn't work ffs
+    //drawCircle(160, 100, 50, 0xF);
 
     string_print("\n > ");
 

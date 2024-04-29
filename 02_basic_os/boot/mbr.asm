@@ -35,13 +35,15 @@ kernel_loader:
 
     call debug_line
 
-    ret
+    ; Switch to 32-bit protected mode
+    lgdt [gdt_descriptor]      ; Load GDT
+    mov eax, cr0
+    or eax, 0x1                ; Set PE bit to enable protected mode
+    mov cr0, eax
 
-debug_line:
-    mov bx, DEBUG_MSG
-    call print16
-    call newline_print16
-    ret
+    jmp CODE_SEG:BIT32_START ; Jump to 32-bit code segment
+
+
 
 [bits 32]
 BIT32_START:
@@ -49,6 +51,12 @@ BIT32_START:
     call print32
     call KERNEL_OFFSET
     jmp $
+
+debug_line:
+    mov bx, DEBUG_MSG
+    call print16
+    call newline_print16
+    ret
 
 BOOT_DRIVE db 0
 MODE_16BIT_MSG db "Started 16-Bit Real Mode", 0
