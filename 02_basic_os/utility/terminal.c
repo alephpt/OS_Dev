@@ -9,8 +9,11 @@ typedef struct {
 
 typedef enum {
     SHUTDOWN,
-    DIZZ,
+    PASS,
     TEST,
+    START,
+    KILL,
+    EXIT,
 } commandVals;
 
 Scanner scanner;
@@ -19,12 +22,21 @@ int parseInput (char in[]) {
     if (str_comp(in, "SHUTDOWN") == 0) {
         return SHUTDOWN;
     } else 
-    if (str_comp(in, "DIZZ") == 0) {
-        return DIZZ;
+    if (str_comp(in, "PASS") == 0) {
+        return PASS;
     } else 
     if (str_comp(in, "TEST") == 0) {
         return TEST;
-    } 
+    }
+    if (str_comp(in, "START") == 0) {
+        return START;
+    }
+    if (str_comp(in, "KILL") == 0) {
+        return KILL;
+    }
+    if (str_comp(in, "EXIT") == 0) {
+        return EXIT;
+    }
 
     return -1;    
 }
