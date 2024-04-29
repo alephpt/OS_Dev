@@ -53,20 +53,33 @@ bool backspace (char s[]) {
 }
 
 void execute_input (char *input) {
-    if (str_comp(input, "TEST") == 0) {
-        string_print("This Test Worked!\n");
-    } else 
-    if (str_comp(input, "SHUTDOWN") == 0) {
-        string_print("Shutting Down. Goodbye!\n");
-        asm volatile("hlt");
-    } else 
-    if (str_comp(input, "DIZZ") == 0) {
-        string_print("Gae!\n");
-    } else 
-    {
-        string_print("Unknown command: ");
-        string_print(input);
-    }
+    switch (parseInput(input)) 
+        {
+            case SHUTDOWN:
+                string_print("Shutting down...\n");
+                asm volatile("hlt");
+                // kill the system
+
+                break;
+            case PASS:
+                string_print("Password: ");
+                break;
+            case TEST:
+                string_print("Test command\n");
+                break;
+            case START:
+                string_print("Starting...\n");
+                break;
+            case KILL:
+                string_print("Killing...\n");
+                break;
+            case EXIT:
+                string_print("Exiting...\n");
+                break;
+            default:
+                string_print("Unknown command: ");
+                string_print(input);
+        }
     
     string_print("\n > ");
 

@@ -28,7 +28,7 @@ void kernel_init () {
 void kernel_entry (){
     kernel_init();
 
-    string_print(" - | Welcome to Gambit | - ");
+    string_print(" - SwarmOS - ");
     newline_print();
 
     string_print("\n > ");

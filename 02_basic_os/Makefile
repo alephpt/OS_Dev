@@ -1,3 +1,4 @@
+BUILD_DIR = ~/mine/build
 C_SOURCES = $(wildcard utility/*.c drivers/*.c cpu/*.c kernel/kernel.c)
 C_HEADERS = $(wildcard utility/*.h drivers/*.h cpu/*.h)
 OBJ_FILES = $(C_SOURCES:.c=.o cpu/interrupt.o)
@@ -11,7 +12,8 @@ os.bin: boot/mbr.bin kernel.bin
 	cat $^ > $@
 
 run: os.bin
-	qemu-system-i386 -fda $<
+	cp os.bin $(BUILD_DIR)/os.bin
+	qemu-system-i386 -fda $(BUILD_DIR)/os.bin -monitor stdio
 #	qemu-system-i386 -drive format=raw,media=disk,index=0,file=$<
 
 echo: os.bin
@@ -33,13 +35,13 @@ kernel.elf: boot/entry.o ${OBJ_FILES}
 	i686-elf-ld -m elf_i386 -o $@ -Ttext 0x1000 $^
 
 debug: os.bin kernel.elf
-	qemu-system-i386 -S -fda os.bin -gdb tcp::9000 -monitor telnet:localhost:9002,server,nowait &
+	qemu-system-i386 -S -fda $(BUILD_DIR)/os.bin format=raw -gdb tcp::9000 -monitor telnet:localhost:9002,server,nowait &
 	gdb -ex "target remote localhost:9000" -ex "symbol-file kernel.elf"
 
 clean:
 	$(RM) -v *.bin *.o *.dis *.elf
-	$(RM) -v kernel/*.o
-	$(RM) -v utility/*.o
-	$(RM) -v boot/*.o boot/*.bin
-	$(RM) -v drivers/*.o
-	$(RM) -v cpu/*.o
+	$(RM) -v boot/*.bin boot/*.o
+	$(RM) -v utility/*.o drivers/*.o cpu/*.o
+	$(RM) -v kernel/*.o kernel/*.bin kernel/*.elf
+	
+
