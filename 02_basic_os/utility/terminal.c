@@ -9,7 +9,7 @@ typedef struct {
 
 typedef enum {
     SHUTDOWN,
-    PASS,
+    CLEAR,
     TEST,
     START,
     KILL,
@@ -18,12 +18,16 @@ typedef enum {
 
 Scanner scanner;
 
+void clearScreen () {
+    string_print("\033[2J");
+}
+
 int parseInput (char in[]) {
     if (str_comp(in, "SHUTDOWN") == 0) {
         return SHUTDOWN;
     } else 
-    if (str_comp(in, "PASS") == 0) {
-        return PASS;
+    if (str_comp(in, "CLEAR") == 0) {
+        return CLEAR;
     } else 
     if (str_comp(in, "TEST") == 0) {
         return TEST;
@@ -61,11 +65,12 @@ void execute_input (char *input) {
                 // kill the system
 
                 break;
-            case PASS:
-                string_print("Password: ");
+            case CLEAR:
+                clearScreen();
                 break;
             case TEST:
                 string_print("Test command\n");
+                drawCircle(160, 100, 50, 0xF);
                 break;
             case START:
                 string_print("Starting...\n");

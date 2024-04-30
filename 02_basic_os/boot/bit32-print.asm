@@ -23,3 +23,13 @@ loop_print32:
 done_print32:
     popa
     ret
+
+clear_screen:
+    pusha
+    mov edi, VIDEO_ADDRESS
+    mov ecx, 80*25
+    mov eax, 0x20
+
+    rep stosw
+    popa
+    ret

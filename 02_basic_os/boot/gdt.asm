@@ -21,7 +21,7 @@ gdt_data:
 gdt_end:
 
 gdt_descriptor:
-    dw gdt_end - gdt_start - 1
+    dw gdt_end - gdt_start
     dd gdt_start
 
 CODE_SEG equ gdt_code - gdt_start
